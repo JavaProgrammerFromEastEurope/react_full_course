@@ -1,22 +1,14 @@
-import React, { useRef, useState } from 'react'
-import CustomButton from './UI/button/CustomButton';
-import CustomInput from './UI/input/CustomInput';
+import React, { useRef, useState } from "react";
+import CustomButton from "./UI/button/CustomButton";
+import CustomInput from "./UI/input/CustomInput";
 
-const PostForm = () => {
+const PostForm = ({ create }) => {
   const [post, setPost] = useState({ title: "", body: "" });
   const [posts, setPosts] = useState([
     { id: 1, title: "JavaScript 1", body: "Description" },
     { id: 2, title: "JavaScript 2", body: "Description" },
     { id: 3, title: "JavaScript 3", body: "Description" }
   ]);
-  // const [posts2, setPosts2] = useState([
-  //   { id: 1, title: "Python 1", body: "Description" },
-  //   { id: 2, title: "Python 2", body: "Description" },
-  //   { id: 3, title: "Python 3", body: "Description" }
-  // ]);
-
-  // const [title, setTitle] = useState("");
-  // const [body, setBody] = useState("");
 
   const bodyInputRef = useRef();
 
@@ -24,14 +16,12 @@ const PostForm = () => {
     e.preventDefault();
     // console.log(title);
     // console.log(bodyInputRef.current.value);
-    // const newPost = {
-    //   id: Date.now(),
-    //   title,
-    //   body,
-    // };
     setPosts([...posts, { ...post, id: Date.now() }]);
-    // setBody('');
-    // setTitle('');
+    const newPost = {
+      ...post,
+      id: Date.now()
+    };
+    create(newPost);
     setPost({ title: "", body: "" });
   };
 
@@ -44,7 +34,7 @@ const PostForm = () => {
         type="text"
         placeholder="Post Title"
       />
-      {/* Uncontrolled element - uses 'Ref'*/}
+      {/* Uncontrolled Component - uses 'Ref'*/}
       <CustomInput
         value={post.body}
         onChange={(e) => setPost({ ...post, body: e.target.value })}
@@ -57,4 +47,4 @@ const PostForm = () => {
   );
 };
 
-export default PostForm
+export default PostForm;
