@@ -14,7 +14,10 @@ const PostItem = (props) => {
         <div>{props.post.body}</div>
       </div>
       <div className="post__btns">
-        <CustomButton onClick={() => router.push(`/posts/${props.post.id}`)}>
+        <CustomButton onClick={() => {
+            router(`/posts/${props.post.id}`)
+            console.log(`/posts/${props.post.id}`)
+        }}>
           Open
         </CustomButton>
         <CustomButton onClick={() => props.remove(props.post)}>
